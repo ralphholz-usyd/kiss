@@ -6,8 +6,27 @@
     {{ end }}
   </div>
 </section>
-{{ if .Site.GoogleAnalytics }}
-{{ template "_internal/google_analytics_async.html" . }}
-{{ end }}
+
+<section>
+    <div class="container has-text-centered">
+
+{{ $mailto := .Site.Params.emailmailto }}
+{{ $first := .Site.Params.emailfirst }}
+{{ $last := .Site.Params.emaillast }}
+{{ $domain:= .Site.Params.emaildomain}}
+{{ $path:= .Site.Params.path}}
+{{ $calendarUrl:= .Site.Params.calendarurl}}
+
+<noscript>Dear users of non-JavaScript enabled browsers: we hide the email address from harvesters with a combination of URL encoding and JS. If you are reading this, you  are probably very familiar with the topic. You can contact us at soit UNDERSCORE scanabuse AT SYDNEY DOT EDU DOT AU. Sorry for this inconvenience.</noscript>
+<script>
+    var mailto = {{ printf "'%s'" $mailto | safeJS }};
+    var emailfirst = {{ printf "'%s'" $first | safeJS }};
+    var emaillast = {{ printf "'%s'" $last | safeJS }};
+    var emaildomain= {{ printf "'%s'" $domain | safeJS }};
+document.write('<span><a href="' + mailto + emailfirst + '_' + emaillast + '@' + emaildomain + '">' + 'CONTACT US BY EMAIL</a></span>');
+</script> &nbsp;  | &nbsp;  <a href="{{ $calendarUrl }}">DISPLAY ONGOING SCANS AS CALENDAR</a>
+    </div>
+</section>
+
 </body>
 </html>
